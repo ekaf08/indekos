@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "nama": "Admin",
+        "created_at": "12/6/2023 04:35:13",
+        "updated_at": "12/6/2023 04:35:13",
+        "deleted_at": null
+    },
+    {
+        "id": 2,
+        "nama": "User",
+        "created_at": "12/6/2023 04:35:13",
+        "updated_at": "12/6/2023 04:35:13",
+        "deleted_at": null
+    },
+    {
+        "id": 3,
+        "nama": "Viewer",
+        "created_at": "21/6/2023 13:36:01",
+        "updated_at": "21/6/2023 13:36:01",
+        "deleted_at": null
+    }
+]

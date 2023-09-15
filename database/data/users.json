@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "id_role": 1,
+        "name": "Admin",
+        "email": "admin@email.com",
+        "email_verified_at": null,
+        "password": "$2y$10$SbhNYKn7NGmnkmy/2lV3IuRgv3cGiUFccc/skJlFSfD3DOQlIuKBS",
+        "remember_token": null,
+        "created_at": "12/6/2023 04:34:49",
+        "updated_at": "12/6/2023 04:34:49",
+        "username": "admin"
+    },
+    {
+        "id": 2,
+        "id_role": 2,
+        "name": "User",
+        "email": "user@email.com",
+        "email_verified_at": null,
+        "password": "$2y$10$9alDd4r70TeUhKTUiHeqiuSASUwA9UnqU4KKCIu1B3F2CDXxvL5ui",
+        "remember_token": null,
+        "created_at": "12/6/2023 04:34:49",
+        "updated_at": "12/6/2023 04:34:49",
+        "username": "user"
+    },
+    {
+        "id": 3,
+        "id_role": 3,
+        "name": "Pret",
+        "email": "pret@email.com",
+        "email_verified_at": null,
+        "password": "$2y$10$ijYbTejqfTxuEjra..V/5erHsuo/8J0xpYAeyvc9qBlSyu2nJ8ElG",
+        "remember_token": null,
+        "created_at": null,
+        "updated_at": null,
+        "username": "pret"
+    }
+]

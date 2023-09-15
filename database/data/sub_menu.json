@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "id_menu": 2,
+        "sub_menu": "Kategori",
+        "url": "kategori.index",
+        "icon": "kategori",
+        "active": "kategori",
+        "created_at": null,
+        "updated_at": null,
+        "deleted_at": null
+    },
+    {
+        "id": 2,
+        "id_menu": 3,
+        "sub_menu": "Web Management",
+        "url": "setup.index",
+        "icon": "web_management",
+        "active": "web_management",
+        "created_at": null,
+        "updated_at": null,
+        "deleted_at": null
+    }
+]

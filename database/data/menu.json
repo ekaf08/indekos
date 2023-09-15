@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "menu": "Dashboard",
+        "url": "dashboard",
+        "has_sub_menu": "f",
+        "icon": "bi bi-grid-fill ",
+        "active": "dashboard",
+        "created_at": "12/6/2023 04:35:26",
+        "updated_at": "12/6/2023 04:35:26",
+        "deleted_at": null
+    },
+    {
+        "id": 2,
+        "menu": "Master",
+        "url": null,
+        "has_sub_menu": "t",
+        "icon": "bi bi-boxes ",
+        "active": "master",
+        "created_at": "12/6/2023 04:35:26",
+        "updated_at": "12/6/2023 04:35:26",
+        "deleted_at": null
+    },
+    {
+        "id": 4,
+        "menu": "Pengaturan",
+        "url": null,
+        "has_sub_menu": "t",
+        "icon": "bi bi-gear ",
+        "active": "pengaturan",
+        "created_at": null,
+        "updated_at": null,
+        "deleted_at": null
+    },
+    {
+        "id": 3,
+        "menu": "Transaksi",
+        "url": null,
+        "has_sub_menu": "t",
+        "icon": "bi bi-arrow-left-right",
+        "active": "transaksi",
+        "created_at": "15/9/2023 09:41:46",
+        "updated_at": "15/9/2023 09:41:46",
+        "deleted_at": null
+    }
+]
