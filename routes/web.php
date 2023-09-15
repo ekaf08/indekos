@@ -6,7 +6,8 @@ use App\Http\Controllers\Backend\{
     KategoriController,
     LoginController,
     MenuController,
-    SubMenuController
+    SubMenuController,
+    KamarController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +34,15 @@ Route::group([
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // route master
+    // ***### Route Kategori
     Route::get('/master/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
     Route::resource('/master/kategori', KategoriController::class);
+    // ***### End Route Kategori
+
+    // ***###  Route Kamar
+    Route::get('/master/kamar/data', [KamarController::class, 'data'])->name('kategori.data');
+    Route::resource('/master/kamar', KamarController::class);
+    // ***### End Route Kamar
 
     // route untuk menu dinamis / web menu management
     // route menu
