@@ -50,6 +50,7 @@ class MenuSeeder extends Seeder
         $menu_json = json_decode(File::get('database/data/menu.json'));
         foreach ($menu_json as $key) {
             Menu::create([
+                'id' => $key->id,
                 'menu' => $key->menu,
                 'url' => $key->url,
                 'has_sub_menu' => $key->has_sub_menu,

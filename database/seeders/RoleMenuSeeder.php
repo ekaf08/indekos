@@ -18,6 +18,7 @@ class RoleMenuSeeder extends Seeder
         $rolemenu_json = json_decode(File::get('database/data/role_menu.json'));
         foreach ($rolemenu_json as $key) {
             RoleMenu::create([
+                'id' => $key->id,
                 'id_role' => $key->id_role,
                 'as_role' => $key->as_role,
                 'id_menu' => $key->id_menu,

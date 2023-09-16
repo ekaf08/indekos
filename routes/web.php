@@ -40,7 +40,7 @@ Route::group([
     // ***### End Route Kategori
 
     // ***###  Route Kamar
-    Route::get('/master/kamar/data', [KamarController::class, 'data'])->name('kategori.data');
+    Route::get('/master/kamar/data', [KamarController::class, 'data'])->name('kamar.data');
     Route::resource('/master/kamar', KamarController::class);
     // ***### End Route Kamar
 

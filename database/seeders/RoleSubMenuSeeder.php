@@ -30,6 +30,7 @@ class RoleSubMenuSeeder extends Seeder
         $roleSubMenu_json = json_decode(File::get('database/data/role_sub_menu.json'));
         foreach ($roleSubMenu_json as $key) {
             RoleSubMenu::create([
+                'id' => $key->id,
                 'id_role_menu' => $key->id_role_menu,
                 'as_menu' => $key->as_menu,
                 'id_sub_menu' => $key->id_sub_menu,

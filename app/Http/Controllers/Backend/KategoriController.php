@@ -36,23 +36,20 @@ class KategoriController extends Controller
                     $query->with('menu_detail');
                     $query->with('sub_menu.sub_menu_detail');
                 }])->where('id', Auth::user()->id_role)->first();
-                $routeName = RoleSubMenu::leftJoin('role_menu', 'role_menu.id', 'role_sub_menu.id_sub_menu')
-                    ->select('role_sub_menu.id_sub_menu')
-                    ->where('id_role', Auth::user()->id_role)->first();
-                $routeId = $routeName->id_sub_menu;
+                $curentUrl = 'kategori.index';
 
                 foreach ($role->menu as $menu) {
                     foreach ($menu->sub_menu as $sub_menu) {
                         // dd($sub_menu);
-                        if ($sub_menu->id_sub_menu ==  $routeId && $sub_menu->update == 't') {
+                        if ($sub_menu->sub_menu_detail->url ==  $curentUrl && $sub_menu->update == 't') {
                             $update = '<button type="button" class="btn btn-link text-primary" onclick="editForm(`' . route('kategori.update', encrypt($query->id)) . '`)" title="Edit- `' . $query->nama . '`"><i class="bi bi-pencil-square"></i></button>';
-                        } elseif ($sub_menu->id_sub_menu == $routeId && $sub_menu->update != 't') {
+                        } elseif ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->update != 't') {
                             $update = '';
                         }
 
-                        if ($sub_menu->id_sub_menu == $routeId && $sub_menu->delete == 't') {
+                        if ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->delete == 't') {
                             $delete = ' <button type="button" class="btn btn-link text-danger" onclick="deleteData(`' . route('kategori.destroy', encrypt($query->id)) . '`)" title="Hapus- `' . $query->nama . '`"><i class="bi bi-trash3"></i></button>';
-                        } elseif ($sub_menu->id_sub_menu == $routeId && $sub_menu->delete != 't') {
+                        } elseif ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->delete != 't') {
                             $delete = '';
                         }
                     }

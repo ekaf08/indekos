@@ -22,7 +22,7 @@
         "deleted_at": null
     },
     {
-        "id": 4,
+        "id": 3,
         "menu": "Pengaturan",
         "url": null,
         "has_sub_menu": "t",
@@ -33,7 +33,7 @@
         "deleted_at": null
     },
     {
-        "id": 3,
+        "id": 4,
         "menu": "Transaksi",
         "url": null,
         "has_sub_menu": "t",

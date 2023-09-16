@@ -39,24 +39,20 @@ class AppMenuController extends Controller
                     $query->with('sub_menu.sub_menu_detail');
                 }])->where('id', Auth::user()->id_role)->first();
 
-                $routeName = RoleSubMenu::leftJoin('role_menu', 'role_menu.id', 'role_sub_menu.id_sub_menu')
-                    ->select('role_sub_menu.id_sub_menu')
-                    ->where('id_role', Auth::user()->id_role)->first();
-                $routeId = $routeName->id_sub_menu;
-                // dd($routeId);
+                $curentUrl = 'setup.index';
 
                 foreach ($role->menu as $menu) {
                     foreach ($menu->sub_menu as $sub_menu) {
                         // dd($sub_menu->sub_menu_detail->id_sub_menu, $menu);
-                        if ($sub_menu->id_sub_menu == $routeId && $sub_menu->update == 't') {
+                        if ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->update == 't') {
                             $update = '<button type="button" class="btn btn-link text-primary" onclick="editForm(`' . route('setup.show', encrypt($query->id)) . '`, `Edit Role ' . $query->nama . '`, `' . encrypt($query->id) . '`)" title="Edit- `' . $query->nama . '`"><i class="bi bi-gear-wide-connected"></i></button>';
-                        } elseif ($sub_menu->id_sub_menu == $routeId && $sub_menu->update != 't') {
+                        } elseif ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->update != 't') {
                             $update = '';
                         }
 
-                        if ($sub_menu->id_sub_menu == $routeId && $sub_menu->delete == 't') {
-                            $delete = ' <button type="button" class="btn btn-link text-danger" onclick="deleteData(`' . route('setup.destroy', encrypt($query->id)) . '`, `Role ' . $query->nama . '`)" title="Hapus- `' . $query->nama . '`"><i class="bi bi-trash3"></i></button>';
-                        } elseif ($sub_menu->id_sub_menu == $routeId && $sub_menu->delete != 't') {
+                        if ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->delete == 't') {
+                            $delete = '<button type="button" class="btn btn-link text-danger" onclick="deleteData(`' . route('setup.destroy', encrypt($query->id)) . '`, `Role ' . $query->nama . '`)" title="Hapus- `' . $query->nama . '`"><i class="bi bi-trash3"></i></button>';
+                        } elseif ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->delete != 't') {
                             $delete = '';
                         }
                     }
@@ -65,7 +61,7 @@ class AppMenuController extends Controller
                 $action = '
                     <div class="">
                         ' . $update . '
-                    ' . $delete . '
+                        ' . $delete . '
                     </div>
                 ';
                 return $action;
