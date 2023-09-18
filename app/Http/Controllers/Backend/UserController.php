@@ -52,11 +52,21 @@ class UserController extends Controller
         $profil->address = $request->address;
         $profil->phone = $request->phone;
         if ($request->hasFile('path_image')) {
-            $file = $request->file('path_image');
-            $nama = 'profil-' . $profil->name . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('img'), $nama);
+            $validator = Validator::make($request->all(), [
+                'path_image' => 'nullable|mimes:png,jpg,jpeg|max:1048',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'errors' => $validator->errors(),
+                    'message' => 'Data gagal disimpan'
+                ], 422);
+            } else {
+                $file = $request->file('path_image');
+                $nama = 'profil-' . $profil->name . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('img'), $nama);
 
-            $profil->path_image = "/img/$nama";
+                $profil->path_image = "/img/$nama";
+            }
         }
         $profil->update();
 
