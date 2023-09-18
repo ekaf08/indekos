@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\{
     MenuController,
     SubMenuController,
     KamarController,
+    UserController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -64,5 +65,9 @@ Route::group([
 
     route::resource('/pengaturan/menu', MenuController::class)->except('create', 'edit');
     route::resource('/pengaturan/submenu', SubMenuController::class)->except('create', 'edit');
+
+    //route profil
+    Route::get('/pengaturan/profil', [UserController::class, 'profil'])->name('profil.index');
+    Route::post('/pengaturan/profil/update', [UserController::class, 'updateprofil'])->name('profil.update');
 });
 //-----***### End Route Backend ***###-----
