@@ -15,22 +15,9 @@ class RoleSubMenuSeeder extends Seeder
      */
     public function run(): void
     {
-        // DB::table('role_sub_menu')->insert([
-        //     'id_role_menu' => 2,
-        //     'id_sub_menu' => 1,
-        //     'as_sub_menu' => 'Kategori',
-        //     'select' => 't',
-        //     'insert' => 't',
-        //     'update' => 't',
-        //     'delete' => 't',
-        //     'import' => 't',
-        //     'export' => 't',
-        // ]);
-
         $roleSubMenu_json = json_decode(File::get('database/data/role_sub_menu.json'));
         foreach ($roleSubMenu_json as $key) {
             RoleSubMenu::create([
-                'id' => $key->id,
                 'id_role_menu' => $key->id_role_menu,
                 'as_menu' => $key->as_menu,
                 'id_sub_menu' => $key->id_sub_menu,
