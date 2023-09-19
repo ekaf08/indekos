@@ -113,6 +113,7 @@
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-envelope"></i>
                                                                     </div>
+                                                                    <p id="emailStatus" class="ms-2 text-sm"></p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -216,7 +217,6 @@
     </div>
 @endsection
 @includeIf('includes.sweetalert')
-@includeIf('includes.summernote')
 
 @push('scripts')
     <script>
@@ -319,5 +319,39 @@
             });
         });
         // End submit ke rout profil update
+
+        // Cek email menggunakan fungsi key up
+        $(document).ready(function() {
+            $('#email').keyup(function() {
+                var email = $('#email').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('cek_email') }}',
+                    data: {
+                        _token: csrfToken,
+                        email: email
+                    },
+                    success: function(response) {
+                        if (response.exists) {
+                            var message = response.errors.email[0]
+                            console.log(response.errors.email[0]);
+                            $('#emailStatus').text(message).addClass(
+                                'text-danger');
+                            $('#email').addClass('is-invalid');
+                        } else {
+                            // $('#emailStatus').text('Alamat email tersedia.').add('color','green');
+                            $('#emailStatus').text('').removeClass(
+                                'text-danger');
+                            $('#email').removeClass('is-invalid');
+                        }
+                    },
+                    error: function() {
+                        $('#emailStatus').text('Terjadi kesalahan dalam memeriksa email.').css(
+                            'color', 'red');
+                    }
+                });
+            });
+        });
+        //End Cek email menggunakan fungsi key up
     </script>
 @endpush

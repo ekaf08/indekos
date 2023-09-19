@@ -12,6 +12,29 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function getEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $validator = Validator::make($request->all(), [
+            'email' => 'unique:users,email',
+        ]);
+        $user = User::where('email', $email)->first();
+
+        if ($user) {
+            $exists = true;
+        } else {
+            // Email belum terdaftar
+            $exists = false;
+        }
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+                'exists' => $exists
+            ]);
+        }
+        // return response()->json(['exists' => $exists]);
+    }
+
     public function profil()
     {
         $profil = auth()->user();
@@ -53,7 +76,7 @@ class UserController extends Controller
         $profil->phone = $request->phone;
         if ($request->hasFile('path_image')) {
             $validator = Validator::make($request->all(), [
-                'path_image' => 'nullable|mimes:png,jpg,jpeg|max:1048',
+                'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             ]);
             if ($validator->fails()) {
                 return response()->json([

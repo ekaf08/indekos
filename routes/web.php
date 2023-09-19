@@ -33,7 +33,6 @@ Route::group([
     'middleware' => ['auth', 'getUserMenu', 'getRouteName']
 ], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
     // route master
     // ***### Route Kategori
     Route::get('/master/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
@@ -69,5 +68,6 @@ Route::group([
     //route profil
     Route::get('/pengaturan/profil', [UserController::class, 'profil'])->name('profil.index');
     Route::post('/pengaturan/profil/update', [UserController::class, 'updateprofil'])->name('profil.update');
+    Route::post('/cekemail', [UserController::class, 'getEmail'])->name('cek_email');
 });
 //-----***### End Route Backend ***###-----
