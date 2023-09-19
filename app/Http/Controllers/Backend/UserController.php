@@ -76,6 +76,7 @@ class UserController extends Controller
             }
         }
 
+        $profil->updated_by = auth()->user()->name;
         $profil->name = $request->name;
         $profil->address = $request->address;
         $profil->phone = $request->phone;
