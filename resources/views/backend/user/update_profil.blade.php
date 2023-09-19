@@ -121,15 +121,9 @@
                                                             <label for="address">Alamat</label>
                                                         </div>
                                                         <div class="col-md-10">
-                                                            <div class="form-group has-icon-left">
+                                                            <div class="form-group ">
                                                                 <div class="position-relative">
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="Alamat tempat tinggal .."
-                                                                        name="address" id="address"
-                                                                        value="{{ $profil->address }}">
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-house"></i>
-                                                                    </div>
+                                                                    <textarea name="address" id="address" class="form-control " cols="30" rows="5">{{ $profil->address }}</textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -222,6 +216,7 @@
     </div>
 @endsection
 @includeIf('includes.sweetalert')
+@includeIf('includes.summernote')
 
 @push('scripts')
     <script>
@@ -313,7 +308,6 @@
                     contentType: false, // Diperlukan agar tipe konten tidak diatur secara otomatis
                     success: function(response) {
                         showAlert(response.message, 'success');
-                        location.reload();
                     },
                     error: function(errors) {
                         var message = errors.responseJSON.message;
