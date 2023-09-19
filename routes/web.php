@@ -36,13 +36,24 @@ Route::group([
     // route master
     // ***### Route Kategori
     Route::get('/master/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
-    Route::resource('/master/kategori', KategoriController::class);
+    Route::resource('/master/kategori', KategoriController::class)->except('create', 'edit');
     // ***### End Route Kategori
 
     // ***###  Route Kamar
     Route::get('/master/kamar/data', [KamarController::class, 'data'])->name('kamar.data');
-    Route::resource('/master/kamar', KamarController::class);
+    Route::resource('/master/kamar', KamarController::class)->except('create', 'edit');
     // ***### End Route Kamar
+
+    // ***###  Route User.
+    Route::get('/master/user/data', [UserController::class, 'data'])->name('user.data');
+    Route::resource('/master/user', UserController::class);
+
+    //route profil
+    Route::get('/pengaturan/profil', [UserController::class, 'profil'])->name('profil.index');
+    Route::post('/pengaturan/profil/update', [UserController::class, 'updateprofil'])->name('profil.update');
+    Route::post('/cekemail', [UserController::class, 'getEmail'])->name('cek_email');
+    // ***### End Route User
+
 
     // route untuk menu dinamis / web menu management
     // route menu
@@ -64,10 +75,5 @@ Route::group([
 
     route::resource('/pengaturan/menu', MenuController::class)->except('create', 'edit');
     route::resource('/pengaturan/submenu', SubMenuController::class)->except('create', 'edit');
-
-    //route profil
-    Route::get('/pengaturan/profil', [UserController::class, 'profil'])->name('profil.index');
-    Route::post('/pengaturan/profil/update', [UserController::class, 'updateprofil'])->name('profil.update');
-    Route::post('/cekemail', [UserController::class, 'getEmail'])->name('cek_email');
 });
 //-----***### End Route Backend ***###-----

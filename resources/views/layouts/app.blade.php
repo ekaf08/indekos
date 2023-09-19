@@ -2,13 +2,6 @@
 <html lang="en">
 
 <head>
-    {{-- <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,800;0,900;1,100;1,200;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-        * {
-            font-family: "Poppins", sans-serif;
-        }
-    </style> --}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -19,6 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('/backend/assets/images/logo/favicon.png') }}" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('/backend/assets/css/shared/iconly.css') }}">
+    <link rel="stylesheet" href="{{ asset('/backend/assets/custom/custom_style.css') }}">
 
     @stack('css_vendor')
     @stack('css')

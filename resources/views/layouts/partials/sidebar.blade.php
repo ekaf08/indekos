@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col-md-7 ms-2">
-            <div class="fw-bold">Selamat Datang,</div>
+            <div class="fw-bold-custom">Selamat Datang,</div>
             <div>
                 <small>{{ ucwords(auth()->user()->name) }}</small>
             </div>

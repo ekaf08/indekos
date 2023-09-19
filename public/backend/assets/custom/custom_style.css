@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap");
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.sidebar-wrapper .menu .sidebar-link span {
+    font-weight: 500 !important;
+}
+
+.fw-bold-custom {
+    font-weight: 500 !important;
+}
+
+.page-heading .h3,
+.page-heading h3 {
+    font-weight: 500 !important;
+}
+
+table.dataTable thead > tr > th.sorting,
+table.dataTable thead > tr > th.sorting_asc,
+table.dataTable thead > tr > th.sorting_desc,
+table.dataTable thead > tr > th.sorting_asc_disabled,
+table.dataTable thead > tr > th.sorting_desc_disabled,
+table.dataTable thead > tr > td.sorting,
+table.dataTable thead > tr > td.sorting_asc,
+table.dataTable thead > tr > td.sorting_desc,
+table.dataTable thead > tr > td.sorting_asc_disabled,
+table.dataTable thead > tr > td.sorting_desc_disabled {
+    font-weight: 500 !important;
+}
+
+.dataTable-table:not(.table-borderless) thead th,
+.table:not(.table-borderless) thead th {
+    font-weight: 500 !important;
+}
