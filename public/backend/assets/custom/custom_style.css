@@ -35,10 +35,14 @@ table.dataTable thead > tr > td.sorting_desc_disabled {
     font-weight: 500 !important;
 }
 
-body.theme-dark .sidebar-wrapper .menu .submenu .submenu-item a {
+/* body.theme-dark .sidebar-wrapper .menu .submenu .submenu-item a {
     font-size: 0.83rem !important;
 }
 
 .sidebar-wrapper .menu .sidebar-link {
     font-size: 0.98rem !important;
+} */
+
+.sidebar-wrapper .menu {
+    padding: 0 1rem !important;
 }
