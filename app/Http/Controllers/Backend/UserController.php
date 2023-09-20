@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Roles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -14,11 +15,54 @@ class UserController extends Controller
 {
     public function index()
     {
+        $url = 'user.index';
+        $getAkses = Roles::getAkses($url);
         $getSubMenu = Roles::getSubMenu();
         if ($getSubMenu) {
             return view('error.404');
         }
-        return view('backend.user.index');
+        return view('backend.user.index', compact('getAkses'));
+    }
+
+    public function data()
+    {
+        $data = User::getUser();
+        return datatables($data)
+            ->addIndexColumn()
+            ->editColumn('nama', function ($data) {
+                return ucwords($data->name);
+            })
+            ->editColumn('path_image', function ($data) {
+                return '<img src="' . Storage::disk('public')->url($data->path_image) . '" class="img-thumbnail mx-auto d-block">';
+            })
+            ->editColumn('address', function ($data) {
+                return ucwords($data->address);
+            })
+            ->addColumn('action', function ($data) {
+                $url = 'user.index';
+                $getAkses = Roles::getAkses($url);
+                if ($getAkses->update == 't') {
+                    $update = '<button type="button" class="btn btn-link text-primary" onclick="editForm(`' . route('user.update', encrypt($data->id)) . '`)" title="Edit- `' . $data->nama . '`"><i class="bi bi-pencil-square"></i></button>';
+                } elseif ($getAkses->update != 't') {
+                    $update = '';
+                }
+
+                if ($getAkses->delete == 't') {
+                    $delete = ' <button type="button" class="btn btn-link text-danger" onclick="deleteData(`' . route('user.destroy', encrypt($data->id)) . '`)" title="Hapus- `' . $data->nama . '`"><i class="bi bi-trash3"></i></button>';
+                } elseif ($getAkses->delete != 't') {
+                    $delete = '';
+                }
+
+                $action = '
+                <div class="">
+                    ' . $update . '
+                ' . $delete . '
+                </div>
+            ';
+                return $action;
+            })
+            ->rawColumns(['action', 'nama', 'address', 'path_image'])
+            ->make(true);
     }
 
     public function getEmail(Request $request)

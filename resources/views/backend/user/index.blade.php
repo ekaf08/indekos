@@ -17,62 +17,61 @@
 
 @section('content')
     <div class="card">
-        {{-- @dd(auth()->user()) --}}
-        @foreach ($role->menu as $menu)
-            @foreach ($menu->sub_menu as $sub_menu)
-                @if ($sub_menu->sub_menu_detail->url == $routeName && $sub_menu->insert == 't' && $sub_menu->deleted_at == '')
-                    <div class="card-header">
-                        <button class="btn btn-primary" onclick="addForm(`{{ route('user.store') }}`, 'Tambah User')"><i
-                                class="bi bi-plus"></i>
-                            Tambah User</button>
-                    </div>
-                @endif
+        @if ($getAkses->insert == 't')
+            <div class="card-header">
+                <button class="btn btn-primary" onclick="addForm(`{{ route('user.store') }}`, 'Tambah User')"><i
+                        class="bi bi-plus"></i>
+                    Tambah User</button>
+            </div>
+        @endif
 
-                @if ($sub_menu->sub_menu_detail->url == $routeName && $sub_menu->select == 't' && $sub_menu->deleted_at == '')
-                    <div class="card-body">
-                        <section class="section">
-                            <div class="row" id="table-head">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            {{-- <h4 class="card-title">Role</h4> --}}
-                                        </div>
+        @if ($getAkses->select == 't')
+            <div class="card-body">
+                <section class="section">
+                    <div class="row" id="table-head">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    {{-- <h4 class="card-title">Role</h4> --}}
+                                </div>
 
-                                        <div class="table-responsive">
-                                            <table class="table mb-0 table-kategori">
-                                                <thead class="thead-dark">
-                                                    <tr>
-                                                        <th class="text-center" width="5%">No</th>
-                                                        <th class="text-center">Nama Kategori</th>
-                                                        <th class="text-center" width="10%">#</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                <div class="table-responsive">
+                                    <table class="table mb-0 table-user">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="text-center" width="5%">No</th>
+                                                <th class="text-center" width="10%"></th>
+                                                <th class="text-center">Nama </th>
+                                                <th class="text-center">Alamat</th>
+                                                <th class="text-center" width="10%">No Hp</th>
+                                                <th class="text-center" width="10%">#</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </section>
-                        @includeIf('backend.kategori.form')
+                        </div>
                     </div>
-                @endif
-            @endforeach
-        @endforeach
+                </section>
+                @includeIf('backend.kategori.form')
+            </div>
+        @endif
+
     </div>
 @endsection
 @includeIf('includes.datatable')
 @includeIf('includes.sweetalert')
 
 @push('scripts')
-    {{-- <script>
+    <script>
         let modal = '#modal-form';
         let table;
 
         // ---- Start Datatable
-        table = $('.table-kategori').DataTable({
+        table = $('.table-user').DataTable({
             processing: true,
             autoWidth: false,
             serverside: true,
@@ -87,7 +86,7 @@
                 },
             ],
             ajax: {
-                url: '{{ route('kategori.data') }}',
+                url: '{{ route('user.data') }}',
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -95,7 +94,37 @@
                     sortable: false,
                 },
                 {
+                    data: 'path_image',
+                    render: function(data, type, row) {
+                        if (data == null) {
+                            return "Tidak Ada";
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
                     data: 'nama',
+                    render: function(data, type, row) {
+                        if (data == null) {
+                            return "Tidak Ada";
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
+                    data: 'address',
+                    render: function(data, type, row) {
+                        if (data == null) {
+                            return "Tidak Ada";
+                        } else {
+                            return data
+                        }
+                    }
+                },
+                {
+                    data: 'phone',
                     render: function(data, type, row) {
                         if (data == null) {
                             return "Tidak Ada";
@@ -160,5 +189,5 @@
                 });
         }
         // ---- End Function untuk Edit data
-    </script> --}}
+    </script>
 @endpush
