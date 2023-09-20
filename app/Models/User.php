@@ -42,4 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    static public function getUser()
+    {
+        $user = User::where('id_role', '!=', '1')->get();
+        return $user;
+    }
 }
