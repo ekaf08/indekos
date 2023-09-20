@@ -18,8 +18,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $getMenu = Roles::getSubMenu();
-        if ($getMenu) {
+        $getSubMenu = Roles::getSubMenu();
+        if ($getSubMenu) {
             return view('error.404');
         }
         return view('backend.kategori.index');
@@ -28,7 +28,6 @@ class KategoriController extends Controller
     public function data()
     {
         $query = Kategori::orderBy('id', 'desc')->get();
-        // dd($query);
 
         return datatables($query)
             ->addIndexColumn()
@@ -36,27 +35,18 @@ class KategoriController extends Controller
                 return ucwords($query->nama);
             })
             ->addColumn('action', function ($query) {
-                $role = Roles::with(['menu' => function ($query) {
-                    $query->with('menu_detail');
-                    $query->with('sub_menu.sub_menu_detail');
-                }])->where('id', Auth::user()->id_role)->first();
-                $curentUrl = 'kategori.index';
+                $url = 'kategori.index';
+                $getAkses = Roles::getAkses($url);
+                if ($getAkses->update == 't') {
+                    $update = '<button type="button" class="btn btn-link text-primary" onclick="editForm(`' . route('kategori.update', encrypt($query->id)) . '`)" title="Edit- `' . $query->nama . '`"><i class="bi bi-pencil-square"></i></button>';
+                } elseif ($getAkses->update != 't') {
+                    $update = '';
+                }
 
-                foreach ($role->menu as $menu) {
-                    foreach ($menu->sub_menu as $sub_menu) {
-                        // dd($sub_menu);
-                        if ($sub_menu->sub_menu_detail->url ==  $curentUrl && $sub_menu->update == 't') {
-                            $update = '<button type="button" class="btn btn-link text-primary" onclick="editForm(`' . route('kategori.update', encrypt($query->id)) . '`)" title="Edit- `' . $query->nama . '`"><i class="bi bi-pencil-square"></i></button>';
-                        } elseif ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->update != 't') {
-                            $update = '';
-                        }
-
-                        if ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->delete == 't') {
-                            $delete = ' <button type="button" class="btn btn-link text-danger" onclick="deleteData(`' . route('kategori.destroy', encrypt($query->id)) . '`)" title="Hapus- `' . $query->nama . '`"><i class="bi bi-trash3"></i></button>';
-                        } elseif ($sub_menu->sub_menu_detail->url == $curentUrl && $sub_menu->delete != 't') {
-                            $delete = '';
-                        }
-                    }
+                if ($getAkses->delete == 't') {
+                    $delete = ' <button type="button" class="btn btn-link text-danger" onclick="deleteData(`' . route('kategori.destroy', encrypt($query->id)) . '`)" title="Hapus- `' . $query->nama . '`"><i class="bi bi-trash3"></i></button>';
+                } elseif ($getAkses->delete != 't') {
+                    $delete = '';
                 }
 
                 $action = '

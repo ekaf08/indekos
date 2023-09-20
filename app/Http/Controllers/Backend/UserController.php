@@ -14,8 +14,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $getMenu = Roles::getSubMenu();
-        if ($getMenu) {
+        $getSubMenu = Roles::getSubMenu();
+        if ($getSubMenu) {
             return view('error.404');
         }
         return view('backend.user.index');

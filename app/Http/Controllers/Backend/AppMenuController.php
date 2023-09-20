@@ -17,6 +17,10 @@ class AppMenuController extends Controller
 {
     public function index()
     {
+        $getSubMenu = Roles::getSubMenu();
+        if ($getSubMenu) {
+            return view('error.404');
+        }
         $lala = Menu::orderBy('id', 'asc')->get();
         $subMenu = SubMenu::orderBy('id', 'asc')->get();
         return view('backend.setup.index', compact('lala', 'subMenu'));
