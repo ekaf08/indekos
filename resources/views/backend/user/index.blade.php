@@ -40,8 +40,8 @@
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th class="text-center" width="5%">No</th>
-                                                <th class="text-center" width="10%"></th>
-                                                <th class="text-center">Nama </th>
+                                                <th class="text-center" width="10%">Profil</th>
+                                                <th class="text-center" width="20%">Nama </th>
                                                 <th class="text-center">Alamat</th>
                                                 <th class="text-center" width="10%">No Hp</th>
                                                 <th class="text-center" width="10%">#</th>

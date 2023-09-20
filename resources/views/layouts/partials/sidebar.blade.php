@@ -3,8 +3,8 @@
         <div class="col-md-3 ms-4">
             <div class="profile-icon" style="height: 100%">
                 {{-- <i class="iconly-boldShow bi bi-person-circle" style="margin-right: 12%;margin-bottom: 12%"></i> --}}
-                <img src="{{ url(auth()->user()->path_image ?? '') }}" class="rounded mx-auto d-block" width="80px"
-                    height="80px" alt="Profil">
+                <img src="{{ url(Storage::disk('local')->url(auth()->user()->path_image)) }}"
+                    class="rounded mx-auto d-block" width="80px" height="80px" alt="Profil">
             </div>
         </div>
         <div class="col-md-7 ms-2">

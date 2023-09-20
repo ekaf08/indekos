@@ -46,7 +46,7 @@
                                                                 </button>
                                                                 <img id="preview-image"
                                                                     class="img-fluid img-thumbnail rounded-5 justify-content-start"
-                                                                    src="{{ url($profil->path_image ?? '/') }}"
+                                                                    src="{{ url(Storage::disk('local')->url(auth()->user()->path_image ?? '')) }}"
                                                                     alt="Preview Image"
                                                                     style=" max-height: 200px; object-fit: cover; ">
                                                             </div>

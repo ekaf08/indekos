@@ -33,7 +33,7 @@ class UserController extends Controller
                 return ucwords($data->name);
             })
             ->editColumn('path_image', function ($data) {
-                return '<img src="' . Storage::disk('public')->url($data->path_image) . '" class="img-thumbnail mx-auto d-block">';
+                return '<img src="' . url(Storage::disk('local')->url($data->path_image)) . '" class="rounded mx-auto d-block" width="45px" height="45px">';
             })
             ->editColumn('address', function ($data) {
                 return ucwords($data->address);
@@ -130,7 +130,7 @@ class UserController extends Controller
         $profil->phone = $request->phone;
         if ($request->hasFile('path_image')) {
             $validator = Validator::make($request->all(), [
-                'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+                'path_image' => 'nullable|mimes:png,jpg,jpeg',
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -138,11 +138,7 @@ class UserController extends Controller
                     'message' => 'Data gagal disimpan'
                 ], 422);
             } else {
-                $file = $request->file('path_image');
-                $nama = 'profil-' . $profil->name . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('img'), $nama);
-
-                $profil->path_image = "/img/$nama";
+                $profil->path_image = upload('profil_img', $request->file('path_image'), 'profil-' . auth()->user()->name);
             }
         }
         $profil->update();

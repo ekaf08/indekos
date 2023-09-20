@@ -12,6 +12,10 @@
     font-weight: 500 !important;
 }
 
+.form-group label {
+    font-weight: 400 !important;
+}
+
 .page-heading .h3,
 .page-heading h3 {
     font-weight: 500 !important;
