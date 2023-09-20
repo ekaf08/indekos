@@ -25,7 +25,7 @@ class Roles extends Model
     static public function getSubMenu()
     {
         $url = Route::currentRouteName();
-        $getMenu = Roles::withTrashed()
+        $getSubMenu = Roles::withTrashed()
             ->leftJoin('role_menu', 'role_menu.id_role', 'roles.id')
             ->leftJoin('role_sub_menu', 'role_sub_menu.id_role_menu', 'role_menu.id')
             ->leftJoin('sub_menu', 'sub_menu.id', 'role_sub_menu.id_sub_menu')
@@ -33,9 +33,22 @@ class Roles extends Model
             ->where('roles.id', auth()->user()->id_role)
             ->where('sub_menu.url', $url)
             ->select('role_sub_menu.*', 'sub_menu.url')
-            ->withTrashed()
             ->first();
 
-        return $getMenu;
+        return $getSubMenu;
+    }
+
+    static public function getAkses($url)
+    {
+        $getAkses = Roles::select('role_sub_menu.*', 'sub_menu.url')
+            ->leftJoin('role_menu', 'role_menu.id_role', 'roles.id')
+            ->leftJoin('role_sub_menu', 'role_sub_menu.id_role_menu', 'role_menu.id')
+            ->leftJoin('sub_menu', 'sub_menu.id', 'role_sub_menu.id_sub_menu')
+            ->whereNull('role_sub_menu.deleted_at')
+            ->where('roles.id', auth()->user()->id_role)
+            ->where('sub_menu.url', $url)
+            ->first();
+
+        return $getAkses;
     }
 }
