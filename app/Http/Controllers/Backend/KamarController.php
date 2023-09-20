@@ -12,6 +12,10 @@ class KamarController extends Controller
      */
     public function index()
     {
+        $getMenu = Roles::getSubMenu();
+        if ($getMenu) {
+            return view('error.404');
+        }
         dd('ok kamar index');
     }
 

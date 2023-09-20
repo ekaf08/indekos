@@ -18,6 +18,10 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        $getMenu = Roles::getSubMenu();
+        if ($getMenu) {
+            return view('error.404');
+        }
         return view('backend.kategori.index');
     }
 

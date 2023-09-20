@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Roles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-
 class UserController extends Controller
 {
     public function index()
     {
+        $getMenu = Roles::getSubMenu();
+        if ($getMenu) {
+            return view('error.404');
+        }
         return view('backend.user.index');
     }
 
