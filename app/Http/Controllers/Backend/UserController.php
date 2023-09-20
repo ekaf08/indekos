@@ -33,7 +33,9 @@ class UserController extends Controller
                 return ucwords($data->name);
             })
             ->editColumn('path_image', function ($data) {
-                return '<img src="' . url(Storage::disk('local')->url($data->path_image)) . '" class="rounded mx-auto d-block" width="45px" height="45px">';
+                return '<button type="button" onclick="zoom_img()" class="btn border-0 btn_zoom" data-bs-toggle="modal" data-bs-target="#exampleModal" data-img="' . url(Storage::disk('local')->url($data->path_image)) . '" data-nama="' . $data->name . '"> 
+                         <img src="' . url(Storage::disk('local')->url($data->path_image)) . '" class="rounded mx-auto d-block" width="45px" height="45px">
+                        </button>';
             })
             ->editColumn('address', function ($data) {
                 return ucwords($data->address);
