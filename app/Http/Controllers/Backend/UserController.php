@@ -38,7 +38,9 @@ class UserController extends Controller
                         </a>';
             })
             ->editColumn('address', function ($data) {
-                return ucwords($data->address);
+                $address = ucwords($data->address);
+                $limit = mb_strimwidth($address, 0, 120, '...');
+                return $limit;
             })
             ->addColumn('action', function ($data) {
                 $url = 'user.index';
@@ -56,7 +58,7 @@ class UserController extends Controller
                 }
 
                 $action = '
-                <div class="">
+                <div class="text-center">
                     ' . $update . '
                 ' . $delete . '
                 </div>
