@@ -15,13 +15,16 @@ class UserController extends Controller
 {
     public function index()
     {
-        $url = 'user.index';
-        $getAkses = Roles::getAkses($url);
         $getSubMenu = Roles::getSubMenu();
         if ($getSubMenu) {
             return view('error.404');
         }
-        return view('backend.user.index', compact('getAkses'));
+
+        $url = 'user.index';
+        $data['getAkses'] = Roles::getAkses($url);
+        $data['getRole'] = Roles::orderBy('nama', 'asc')->get();
+
+        return view('backend.user.index', $data);
     }
 
     public function data()
@@ -67,6 +70,11 @@ class UserController extends Controller
             })
             ->rawColumns(['action', 'nama', 'address', 'path_image'])
             ->make(true);
+    }
+
+    public function store(Request $request)
+    {
+        dd('store user', $request->all());
     }
 
     public function getEmail(Request $request)
