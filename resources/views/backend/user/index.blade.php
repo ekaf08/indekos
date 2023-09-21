@@ -59,12 +59,12 @@
                 @includeIf('backend.kategori.form')
                 <!--Modal untuk menampilkan gambar-->
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="modal_image" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <h5 class="modal-title" id="modal_image_title"></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -79,6 +79,7 @@
                                     </div>
                                 </form>
                             </div>
+                            <div class="modal-footer"></div>
                         </div>
                     </div>
                 </div>
@@ -94,6 +95,7 @@
 @push('scripts')
     <script>
         let modal = '#modal-form';
+        let modal_image = '#modal_image';
         let table;
 
         // ---- Start Datatable
@@ -216,20 +218,22 @@
         }
         // ---- End Function untuk Edit data
 
-        function zoom_img() {
-            const img = $('.btn_zoom').data('img');
-            const nama = $('.btn_zoom').data('nama');
-            console.log('aku disini', img, nama);
-            $(`#exampleModal #exampleModalLabel`).text(nama);
-            $(`#exampleModal #img_src`).attr('src', img);
-        }
+        // fungsi untuk zoom  image yang ada di dalam tabel user 
+        $(document).ready(function() {
+            $('.table-user').on('click', 'a', function() {
+                var img = $(this).data('img');
+                var nama = $(this).data('nama');
+
+                $(modal_image).modal('show');
+                $(`${modal_image} .modal-title`).text(nama)
+                $(`${modal_image} #img_src`).attr('src', img);
+            })
+        })
+        // End fungsi untuk zoom  image 
 
         $('body').on('hidden.bs.modal', '.modal', function() {
             console.log("modal closed");
-            var img = '';
-            var nama = '';
-            $(`#exampleModal #exampleModalLabel`).text(nama);
-            $(`#exampleModal #img_src`).attr('src', img);
+
         });
     </script>
 @endpush
