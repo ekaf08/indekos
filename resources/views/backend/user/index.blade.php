@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </section>
-                @includeIf('backend.kategori.form')
+                @includeIf('backend.user.form')
                 <!--Modal untuk menampilkan gambar-->
                 <!-- Modal -->
                 <div class="modal fade" id="modal_image" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -190,6 +190,8 @@
 
         // ---- Start Function untuk tambah data
         function addForm(url, title) {
+            $('#emailStatus').text('').removeClass('text-danger');
+            $('#email').removeClass('is-invalid');
             $(modal).modal('show');
             $(`${modal} .modal-title`).text(title);
             $(`${modal} form`)[0].reset();
@@ -203,6 +205,8 @@
         // ---- Start Function untuk Edit data
         function editForm(url, title) {
             $.get(url).done(response => {
+                    $('#emailStatus').text('').removeClass('text-danger');
+                    $('#email').removeClass('is-invalid');
                     $(modal).modal('show');
                     $(`${modal} .modal-title`).text(title);
                     $(`${modal} form`).attr('action', url);
@@ -233,7 +237,49 @@
 
         $('body').on('hidden.bs.modal', '.modal', function() {
             console.log("modal closed");
-
         });
+
+        // fungsi untuk cek passsword
+        cekpass = () => {
+            var x = document.getElementById("password");
+
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+        // fungsi untuk cek passsword
+
+        // Cek email menggunakan fungsi key up
+        $(document).ready(function() {
+            $('#email').keyup(function() {
+                var email = $('#email').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('cek_email') }}',
+                    data: {
+                        _token: csrfToken,
+                        email: email
+                    },
+                    success: function(response) {
+                        if (response.exists) {
+                            var message = response.errors.email[0]
+                            $('#email').addClass('is-invalid');
+                            $('#emailStatus').text(message).addClass('text-danger');
+                        } else {
+                            // $('#emailStatus').text('Alamat email tersedia.').add('color','green');
+                            $('#emailStatus').text('').removeClass('text-danger');
+                            $('#email').removeClass('is-invalid');
+                        }
+                    },
+                    error: function() {
+                        $('#emailStatus').text('Terjadi kesalahan dalam memeriksa email.').css(
+                            'color', 'red');
+                    }
+                });
+            });
+        });
+        //End Cek email menggunakan fungsi key up
     </script>
 @endpush
