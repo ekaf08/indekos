@@ -40,6 +40,22 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="path_image">Upload Foto</label>
+                                <input type="file" class="form-control" id="path_image" name="path_image"
+                                    accept=".png, .jpg, .jpeg">
+                                <div class="form-group text-left">
+                                    <button type="button" id="hapus-lampiran"
+                                        class="btn btn-link text-danger text-bold" style="display: none; float: right;"
+                                        title="Hapus Lampiran"><i class="bi bi-x-circle-fill"></i>
+                                    </button>
+                                    <img id="preview-image"
+                                        class="img-fluid img-thumbnail rounded-5 justify-content-start"
+                                        src="{{ url(Storage::disk('local')->url(auth()->user()->path_image ?? '')) }}"
+                                        alt="Preview Image" style=" max-height: 200px; object-fit: cover; ">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="role">Role</label>
                                 <select name="id_role" id="id_role" class="form-control">
                                     <option value="" selected="true"disabled="disabled">-- Pilih --</option>
