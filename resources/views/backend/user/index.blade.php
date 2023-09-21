@@ -91,6 +91,7 @@
 @endsection
 @includeIf('includes.datatable')
 @includeIf('includes.sweetalert')
+@includeIf('includes.select2')
 
 @push('scripts')
     <script>
@@ -222,7 +223,7 @@
         }
         // ---- End Function untuk Edit data
 
-        // fungsi untuk zoom  image yang ada di dalam tabel user 
+        // fungsi untuk zoom image yang ada di dalam tabel user
         $(document).ready(function() {
             $('.table-user').on('click', 'a', function() {
                 var img = $(this).data('img');
@@ -233,7 +234,7 @@
                 $(`${modal_image} #img_src`).attr('src', img);
             })
         })
-        // End fungsi untuk zoom  image 
+        // End fungsi untuk zoom image
 
         $('body').on('hidden.bs.modal', '.modal', function() {
             console.log("modal closed");

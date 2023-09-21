@@ -1,6 +1,6 @@
 <!--Basic Modal -->
-<div class="modal fade text-left" id="modal-form" tabindex="-1" role="dialog" data-bs-backdrop="false"
-    aria-labelledby="myModalLabel1" aria-hidden="true">
+<div class="modal fade text-left" id="modal-form" role="dialog" data-bs-backdrop="false" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,6 +29,16 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="role">Role</label>
+                                <select name="id_role" id="id_role" class="form-select select-2">
+                                    <option value="" selected disabled hidden>-- Pilih --</option>
+                                    @foreach ($getRole as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="phone">No Handphone</label>
                                 <input type="text" class="form-control" id="phone" name="phone"
                                     placeholder="08*******">
@@ -48,21 +58,10 @@
                                         class="btn btn-link text-danger text-bold" style="display: none; float: right;"
                                         title="Hapus Lampiran"><i class="bi bi-x-circle-fill"></i>
                                     </button>
-                                    <img id="preview-image"
-                                        class="img-fluid img-thumbnail rounded-5 justify-content-start"
+                                    <img id="preview-image" class="img-fluid img-thumbnail justify-content-start mt-2"
                                         src="{{ url(Storage::disk('local')->url(auth()->user()->path_image ?? '')) }}"
-                                        alt="Preview Image" style=" max-height: 200px; object-fit: cover; ">
+                                        alt="Preview Image" style=" max-height: 100px; object-fit: cover; ">
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="role">Role</label>
-                                <select name="id_role" id="id_role" class="form-control">
-                                    <option value="" selected="true"disabled="disabled">-- Pilih --</option>
-                                    @foreach ($getRole as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
                             </div>
 
                             <div class="form-group">
