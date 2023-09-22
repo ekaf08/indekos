@@ -46,6 +46,8 @@ Route::group([
 
     // ***###  Route User.
     Route::get('/master/user/data', [UserController::class, 'data'])->name('user.data');
+    Route::get('/master/user/xlsx', [UserController::class, 'xlsx'])->name('user.xlsx');
+    Route::get('/master/user/pdf', [UserController::class, 'pdf'])->name('user.pdf');
     Route::resource('/master/user', UserController::class);
 
     //route profil

@@ -19,9 +19,21 @@
     <div class="card">
         @if ($getAkses->insert == 't')
             <div class="card-header">
-                <button class="btn btn-primary" onclick="addForm(`{{ route('user.store') }}`, 'Tambah User')"><i
-                        class="bi bi-plus"></i>
-                    Tambah User</button>
+                <div class="row">
+                    <div class="col-6">
+                        <button class="btn btn-primary me-4" onclick="addForm(`{{ route('user.store') }}`, 'Tambah User')"><i
+                                class="bi bi-plus"></i>
+                            Tambah User</button>
+                    </div>
+                    <div class="col-6 text-end">
+                        <a href="{{ route('user.xlsx') }}" class="btn btn-success" title="Export User Xlsx"><i
+                                class="bi bi-filetype-xlsx"></i>
+                            Export Xlsx</a>
+                        <button class="btn btn-danger" onclick="addForm(`{{ route('user.store') }}`, 'Tambah User')"><i
+                                class="bi bi-file-pdf" title="Export User Pdf"></i>
+                            Export Pdf</button>
+                    </div>
+                </div>
             </div>
         @endif
 

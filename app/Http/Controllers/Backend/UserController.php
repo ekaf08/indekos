@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExportUsers;
 
 class UserController extends Controller
 {
@@ -75,6 +77,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         dd('store user', $request->all());
+    }
+
+    public function xlsx()
+    {
+        $date = date('d-m-Y');
+        return Excel::download(new ExportUsers, 'user_' . $date . '.xlsx');
     }
 
     public function getEmail(Request $request)
