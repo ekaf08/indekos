@@ -76,7 +76,43 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        dd('store user', $request->all());
+        dd($request->path_image, $request->all());
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|max:255|unique:users,email',
+            'id_role' => 'required',
+            'phone' => 'required', 'regex:/^((71)|(73)|(77))[0-9]{7}/',
+            'address' => 'nullable|min:10',
+            'path_image' => 'mimes:png,jpg,jpeg|max:1048',
+            'password' => 'required',
+        ]);
+
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+                'message' => 'Data gagal disimpan'
+            ], 422);
+        }
+
+        $data['name'] = $request->name;
+        $data['username'] = $request->name;
+        $data['id_role'] = $request->id_role;
+        $data['email'] = $request->email;
+        $data['phone'] = $request->phone;
+        $data['address'] = $request->address;
+        $data['password'] = bcrypt($request->password);
+        $data['updated_by'] = auth()->user()->name;
+        $data['path_image'] = upload('img_campaign', $request->file('path_image'), 'campaign');
+        $data['path_image'] = upload('profil_img', $request->file('path_image'), 'profil-new');
+
+        $user = User::create($data);
+        return response()->json([
+            'data' => $user,
+            'success' => true,
+            'message' => 'Data berhasil disimpan'
+        ]);
     }
 
     public function xlsx()

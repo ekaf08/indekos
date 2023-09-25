@@ -9,7 +9,7 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form action="" method="POST">
+            <form action="" enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 <div class="modal-body">

@@ -26,7 +26,7 @@
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Update Profil {{ $profil->name }}</h4>
+                                            <h4 class="card-title">Update Profil {{ ucwords($profil->name) }}</h4>
                                         </div>
                                         <form class="form form-vertical" id="form_profil" enctype="multipart/form-data">
                                             <div class="card-body">
