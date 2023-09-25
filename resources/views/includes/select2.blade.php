@@ -10,7 +10,7 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $(`.select-2`).select2({
+            $(`.select2`).select2({
                 placeholder: 'Pilih Role',
                 theme: 'bootstrap-5',
                 dropdownParent: $("#modal-form")

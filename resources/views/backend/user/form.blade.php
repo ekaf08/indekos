@@ -30,7 +30,7 @@
 
                             <div class="form-group">
                                 <label for="role">Role</label>
-                                <select name="id_role" id="id_role" class="form-select select-2">
+                                <select name="id_role" id="id_role" class="form-select select2">
                                     <option value="" selected disabled hidden>-- Pilih --</option>
                                     @foreach ($getRole as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -59,8 +59,8 @@
                                         title="Hapus Lampiran"><i class="bi bi-x-circle-fill"></i>
                                     </button>
                                     <img id="preview-image" class="img-fluid img-thumbnail justify-content-start mt-2"
-                                        src="{{ url(Storage::disk('local')->url(auth()->user()->path_image ?? '')) }}"
-                                        alt="Preview Image" style=" max-height: 100px; object-fit: cover; ">
+                                        src="" alt="Preview Image"
+                                        style=" max-height: 100px; object-fit: cover; ">
                                 </div>
                             </div>
 
