@@ -187,6 +187,7 @@
                 .removeClass('is-invalid');
             $('.invalid-feedback').remove();
             $(`.preview-path_image`).attr('src', '').hide();
+            $(`#preview-image`).attr('src', '').hide();
         }
 
         function loopForm(originalForm) {

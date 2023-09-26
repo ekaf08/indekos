@@ -104,6 +104,7 @@
 @includeIf('includes.datatable')
 @includeIf('includes.sweetalert')
 @includeIf('includes.select2')
+@includeIf('includes.previewImage')
 
 @push('scripts')
     <script>
@@ -212,8 +213,18 @@
             $(`${modal} form [name=_method]`).val('post');
             $(`${modal} form [name=nama]`).focus();
             resetInput(`${modal} form`);
+            resetData();
+
         }
         // ---- End Function untuk tambah data
+
+        // start fungsi untuk reset select2 dan preview image
+        function resetData() {
+            $('.select2').trigger('change');
+            $(`#preview-image`).attr('src', '').hide();
+            $('#hapus-lampiran').hide();
+        }
+        // End start fungsi untuk reset select2 dan preview image
 
         // ---- Start Function untuk Edit data
         function editForm(url, title) {
@@ -227,6 +238,7 @@
 
                     resetInput(`${modal} form`);
                     loopForm(response.data);
+                    resetData();
                 })
                 .fail(errors => {
                     var message = 'Data tidak dapat ditampilkan.'
@@ -295,38 +307,10 @@
         });
         //End Cek email menggunakan fungsi key up
 
-        //Fungsi untuk preview image
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#preview-image').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $('input[name="path_image"]').change(function() {
-            $('#hapus-lampiran').show();
-            $('#preview-image').show();
-            previewImage(this);
-        });
-
-        const hapusLampiran = document.querySelector('#hapus-lampiran');
-        const imageTerpilih = document.querySelector('#preview-image');
-        const inputImage = document.querySelector('#path_image');
-
-        hapusLampiran.addEventListener('click', function() {
-            imageTerpilih.src = '';
-            inputImage.value = '';
-            $('#hapus-lampiran').hide();
-            $('#preview-image').hide();
-        })
-        //end Fungsi preview image
 
         // fungsi untuk submit Form
         function submitForm(originalForm) {
-            // console.log(originalForm);
+            console.log(originalForm);
             $.post({
                     url: $(originalForm).attr('action'),
                     data: new FormData(originalForm),
