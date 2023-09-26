@@ -76,8 +76,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->path_image, $request->all());
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|max:255|unique:users,email',
@@ -87,6 +85,8 @@ class UserController extends Controller
             'path_image' => 'mimes:png,jpg,jpeg|max:1048',
             'password' => 'required',
         ]);
+
+        // dd($request->path_image, $request->all(), $request->file('path_image'));
 
         //check if validation fails
         if ($validator->fails()) {
@@ -104,8 +104,7 @@ class UserController extends Controller
         $data['address'] = $request->address;
         $data['password'] = bcrypt($request->password);
         $data['updated_by'] = auth()->user()->name;
-        $data['path_image'] = upload('img_campaign', $request->file('path_image'), 'campaign');
-        $data['path_image'] = upload('profil_img', $request->file('path_image'), 'profil-new');
+        $data['path_image'] = upload('profil_img', $request->file('path_image'), 'profil-' . $request->name);
 
         $user = User::create($data);
         return response()->json([
@@ -186,7 +185,7 @@ class UserController extends Controller
         $profil->phone = $request->phone;
         if ($request->hasFile('path_image')) {
             $validator = Validator::make($request->all(), [
-                'path_image' => 'nullable|mimes:png,jpg,jpeg',
+                'path_image' => 'nullable|mimes:png,jpg,jpeg|max:1048',
             ]);
             if ($validator->fails()) {
                 return response()->json([
