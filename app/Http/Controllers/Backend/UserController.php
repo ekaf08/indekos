@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $url = 'user.index';
         $data['getAkses'] = Roles::getAkses($url);
-        $data['getRole'] = Roles::orderBy('nama', 'asc')->get();
+        $data['getRole'] = Roles::orderBy('id', 'asc')->get();
 
         return view('backend.user.index', $data);
     }
@@ -76,6 +76,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|max:255|unique:users,email',
