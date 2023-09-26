@@ -9,9 +9,8 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form action="" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('post')
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -79,7 +78,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary ml-1">
+                    <button type="button" class="btn btn-primary ml-1" onclick="submitForm(this.form)">
                         <i class="bx bx-check d-block d-sm-none"></i> Simpan
                     </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

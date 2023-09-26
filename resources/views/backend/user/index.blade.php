@@ -323,5 +323,37 @@
             $('#preview-image').hide();
         })
         //end Fungsi preview image
+
+        // fungsi untuk submit Form
+        function submitForm(originalForm) {
+            // console.log(originalForm);
+            $.post({
+                    url: $(originalForm).attr('action'),
+                    data: new FormData(originalForm),
+                    dataType: 'json',
+                    contentType: false,
+                    cache: false,
+                    processData: false
+                })
+                .done(response => {
+                    $(modal).modal('hide');
+                    showAlert(response.message, 'success');
+                    table.ajax.reload();
+                })
+                .fail(errors => {
+                    // console.log(errors.responseJSON.errors);
+                    // return;
+                    var message = 'Data gagal disimpan.'
+                    if (errors.status == 422) {
+                        // console.log(errors.responseJSON.message);
+                        showAlert(message, 'gagal');
+                        loopErrors(errors.responseJSON.errors);
+                        return;
+                    }
+
+                    showAlert(message, 'gagal');
+                });
+        }
+        //End fungsi untuk submit Form
     </script>
 @endpush
