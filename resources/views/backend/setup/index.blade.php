@@ -665,5 +665,34 @@
             })
             //end fungsi untuk button urutan menu
         })
+
+        // ---- Start Function Submit Form
+        $(function() {
+            $('#modal-form').on('submit', function(e) {
+                if (!e.preventDefault()) {
+                    $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
+                        .done((response) => {
+                            // Tampilkan SweetAlert dengan pesan sukses
+                            showAlert(response.message, 'success');
+
+                            // Reset form setelah berhasil
+                            $(`${modal} form`)[0].reset();
+                            $('#modal-form').modal('hide');
+                            table.ajax.reload();
+                        })
+                        .fail((errors) => {
+                            var message = 'Data gagal disimpan.'
+                            if (errors.status == 422) {
+                                // console.log(errors.responseJSON.message);
+                                showAlert(message, 'gagal');
+                                loopErrors(errors.responseJSON.errors);
+                                return;
+                            }
+                            showAlert(message, 'gagal');
+                        })
+                }
+            })
+        });
+        // ---- END Form 
     </script>
 @endpush
