@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ExportUsers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class UserController extends Controller
 {
@@ -204,5 +206,38 @@ class UserController extends Controller
             'success' => true,
             'message' => 'Data berhasil disimpan'
         ]);
+    }
+
+    public function byQuery()
+    {
+        $data['tables'] = Schema::getAllTables();
+        return view('backend.user.byquery', $data);
+    }
+
+    public function getColumn(Request $request)
+    {
+        $tabel = $request->tabel;
+        $data['kolom'] = Schema::getColumnListing($tabel);
+        return response()->json($data);
+    }
+    public function getdata(Request $request)
+    {
+        $tabel = $request->tabel;
+        $kolom = $request->kolom;
+        // for ($i = 0; $i < count($kolom); $i++) {
+        //     var_dump($kolom);
+        // }
+        // return;
+        $kolom = implode("','", $request->kolom);
+        $kolom = "'" . $kolom . "'";
+        $kolom1 =  str_replace('"', '', $kolom);;
+        // dd('disini', $request->all(), $kolom);
+        $kolom1 = preg_replace('/"/', '', $kolom);
+        // dd($kolom1);
+
+        $data = DB::table($tabel)
+            ->select($kolom1)
+            ->toSql();
+        dd($data);
     }
 }

@@ -11,7 +11,7 @@
     <script>
         $(document).ready(function() {
             $(`.select2`).select2({
-                placeholder: 'Pilih Role',
+                placeholder: 'Pilih Data',
                 theme: 'bootstrap-5',
                 dropdownParent: $("#modal-form")
             });

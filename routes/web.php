@@ -48,7 +48,10 @@ Route::group([
     Route::get('/master/user/data', [UserController::class, 'data'])->name('user.data');
     Route::get('/master/user/xlsx', [UserController::class, 'xlsx'])->name('user.xlsx');
     Route::get('/master/user/pdf', [UserController::class, 'pdf'])->name('user.pdf');
-    Route::resource('/master/user', UserController::class);
+    Route::get('master/user/query', [UserController::class, 'byQuery'])->name('user.byquery');
+    Route::post('master/user/getcolumn', [UserController::class, 'getColumn'])->name('user.getColumn');
+    Route::post('master/user/getdata', [UserController::class, 'getdata'])->name('getdata.sql');
+    Route::resource('/master/user', UserController::class)->except('create', 'edit');
 
     //route profil
     Route::get('/pengaturan/profil', [UserController::class, 'profil'])->name('profil.index');
