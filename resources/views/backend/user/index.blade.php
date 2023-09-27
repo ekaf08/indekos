@@ -17,25 +17,30 @@
 
 @section('content')
     <div class="card">
-        @if ($getAkses->insert == 't')
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-6">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    @if ($getAkses->insert == 't')
                         <button class="btn btn-primary me-4" onclick="addForm(`{{ route('user.store') }}`, 'Tambah User')"><i
                                 class="bi bi-plus"></i>
                             Tambah User</button>
-                    </div>
-                    <div class="col-6 text-end">
+                    @endif
+                </div>
+                <div class="col-6 text-end">
+                    @if ($getAkses->export == 't')
                         <a href="{{ route('user.xlsx') }}" class="btn btn-success" title="Export User Xlsx"><i
                                 class="bi bi-filetype-xlsx"></i>
                             Export Xlsx</a>
                         <button class="btn btn-danger" onclick="addForm(`{{ route('user.store') }}`, 'Tambah User')"><i
                                 class="bi bi-file-pdf" title="Export User Pdf"></i>
                             Export Pdf</button>
-                    </div>
+                        <a href="{{ route('user.byquery') }}" class="btn btn-info" title="Export by query"> Export by
+                            query</a>
+                    @endif
                 </div>
             </div>
-        @endif
+        </div>
 
         @if ($getAkses->select == 't')
             <div class="card-body">
